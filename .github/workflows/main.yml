@@ -10,6 +10,9 @@ jobs:
   automate-task:
     runs-on: ubuntu-latest
 
+    env:
+      API_KEY: ${{ secrets.API_KEY }}
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -41,6 +44,4 @@ jobs:
         chmod +x script.py
 
     - name: Execute Python script
-      env:
-        API_KEY: ${{ env.API_KEY }}
-      run: python3 script.py ${{ env.API_KEY }} hamid1dev101 hamidaqq output.zip
+      run: python3 script.py $API_KEY hamid1dev101 hamidaqq output.zip
