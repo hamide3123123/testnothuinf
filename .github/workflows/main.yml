@@ -41,4 +41,6 @@ jobs:
         chmod +x script.py
 
     - name: Execute Python script
-      run: python3 script.py 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 kdasdasdashamid hamid120 output.zip
+      env:
+        API_KEY: ${{ env.API_KEY }}
+      run: python3 script.py ${{ env.API_KEY }} hamid1dev101 hamidaqq output.zip
