@@ -41,4 +41,4 @@ jobs:
         chmod +x script.py
 
     - name: Execute Python script
-      run: python3 script.py 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 kdasdasdashamid hamid120 output.zip
+      run: python3 script.py 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 kdasdasdashamid hamid120 output.zip
