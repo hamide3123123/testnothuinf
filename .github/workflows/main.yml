@@ -41,4 +41,4 @@ jobs:
     - name: Execute Python script
       env:
         API_KEY: ${{ secrets.API_KEY }}
-      run: python3 script.py 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 hamid1dev101 hamidaqq output.zip
+      run: python3 script.py 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 hamid1dev101 hamidaqq output.zip
