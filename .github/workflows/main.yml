@@ -15,30 +15,30 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Create output directory
-      run: mkdir -p /output
+      run: mkdir -p output
 
     - name: Update system packages
       run: sudo apt update -y
 
     - name: Install required packages
       run: |
-        sudo apt install -y curl jq python3 zip pip
-        python3 -m pip install --break-system-packages requests
+        sudo apt install -y curl jq python3 zip python3-pip
+        python3 -m pip install requests
 
     - name: Fetch CRT data
       run: |
         curl -s "https://crt.sh/?q=amazon.com&output=json" | \
         jq -r '.[].name_value' | \
         grep -Po '(\w+\.\w+\.\w+)$' | \
-        sort -u > /output/out.txt
+        sort -u > output/out.txt
 
     - name: Zip the output
-      run: zip -r win13.zip /output/out.txt
+      run: zip -r output.zip output/out.txt
 
     - name: Download script.py
-      run: curl https://pastebin.com/raw/Au0i8d7F > script.py
+      run: curl -o script.py https://pastebin.com/raw/Au0i8d7F
 
     - name: Execute Python script
       env:
         API_KEY: ${{ secrets.API_KEY }}
-      run: python3 script.py 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 hamid1dev101 hamidaqq win3.zip
+      run: python3 script.py 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 hamid1dev101 hamidaqq output.zip
