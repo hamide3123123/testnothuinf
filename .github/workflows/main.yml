@@ -36,9 +36,9 @@ jobs:
       run: zip -r output.zip output/out.txt
 
     - name: Download script.py
-      run: curl -o script.py https://pastebin.com/raw/Au0i8d7F
+      run: |
+        curl -o script.py https://pastebin.com/raw/Au0i8d7F
+        chmod +x script.py
 
     - name: Execute Python script
-      env:
-        API_KEY: ${{ secrets.API_KEY }}
       run: python3 script.py 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 hamid1dev101 hamidaqq output.zip
