@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      API_KEY: ${{ vars.APIKEY }}
+      env: ${{ vars.APIKEY }}
 
     steps:
     - name: Checkout code
