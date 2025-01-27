@@ -1,10 +1,7 @@
 name: Setup Docker on Ubuntu
 
 on:
-  push:
-    branches:
-      - main
-  workflow_dispatch: # Allows manual trigger of the workflow
+  workflow_dispatch: # Allows manual trigger of the workflow via GitHub UI or API
 
 jobs:
   setup-docker:
@@ -39,3 +36,4 @@ jobs:
       - name: Verify Docker installation
         run: |
           sudo docker run hello-world
+
